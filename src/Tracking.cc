@@ -18,6 +18,7 @@
 * along with ORB-SLAM2. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include<unistd.h>
 
 #include "Tracking.h"
 
@@ -427,6 +428,9 @@ void Tracking::Track()
                 mLastFrame.GetRotationInverse().copyTo(LastTwc.rowRange(0,3).colRange(0,3));
                 mLastFrame.GetCameraCenter().copyTo(LastTwc.rowRange(0,3).col(3));
                 mVelocity = mCurrentFrame.mTcw*LastTwc;
+
+                std::cout << "LastTwc:\n" << LastTwc << std::endl;
+	            std::cout << "mVelocity:\n" << mVelocity << std::endl;
             }
             else
                 mVelocity = cv::Mat();
